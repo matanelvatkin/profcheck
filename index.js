@@ -9,7 +9,7 @@ app.use(express.json())
 app.use(cors())
 
 app.post('/api/adduser',(req,res)=>{
-    console.log('adduser' ,req);
+    console.log('adduser' ,req.body);
     // axios.post(BASE_URL+'/user',
     //   )
     
