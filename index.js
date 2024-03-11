@@ -8,11 +8,31 @@ const BASE_URL = process.env.BASE_URL
 app.use(express.json())
 app.use(cors())
 
-app.post('/api/adduser',(req,res)=>{
+app.post('/api/adduser',async (req,res)=>{
     console.log('adduser' ,req.body);
-    // axios.post(BASE_URL+'/user',
-    //   )
-    
+    const {data,user_meta} =req.body
+    const request = {
+            "firstName": user_meta.first_name[0],
+            "lastName": user_meta.last_name[0],
+            "username": data.user_login,
+            "providerName": data.display_name,
+            "role": {
+              "id": 1,
+              "name": "CUSTOMER"
+            },
+            "password": data.user_pass,
+            "userProfile": {
+              "organization": {
+                "id": 70,
+                "name": "N.S.O"
+              },
+              "email": data.user_email,
+              "phone": "0",
+              "providerName": data.display_name,
+            }     
+    }
+    const results = await axios.post(BASE_URL+'/user',request)
+    console.log(results);
       res.send('ok')
       
 })
