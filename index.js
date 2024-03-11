@@ -9,8 +9,14 @@ app.use(express.json())
 app.use(cors())
 
 app.post('/api/adduser',async (req,res)=>{
-    console.log('adduser' ,req.body);
+try {
+    
     const {data,user_meta} =req.body
+    const users = await axios.get(BASE_URL+'/user/search/summary')
+    if(users.find((user=>user.userProfile.email==data.user_email))){
+        res.send('user already exists')
+        return 
+    }
     const request = {
             "firstName": user_meta.first_name[0],
             "lastName": user_meta.last_name[0],
@@ -34,6 +40,9 @@ app.post('/api/adduser',async (req,res)=>{
     const results = await axios.post(BASE_URL+'/user',request)
     console.log(results);
       res.send('ok')
+} catch (error) {
+    
+}
       
 })
 app.post('/api/addcheck',(req,res)=>{
