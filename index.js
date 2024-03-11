@@ -9,11 +9,11 @@ app.use(express.json())
 app.use(cors())
 
 app.post('/api/adduser',(req,res)=>{
-    console.log('adduser' ,req.params);
+    console.log('adduser' ,req);
     // axios.post(BASE_URL+'/user',
     //   )
     
-      
+      res.send('ok')
       
 })
 app.post('/api/addcheck',(req,res)=>{
