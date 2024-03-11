@@ -9,7 +9,7 @@ app.use(express.json())
 app.use(cors())
 
 app.post('/api/adduser',(req,res)=>{
-    console.log(req.params);
+    console.log('adduser' ,req.params);
     // axios.post(BASE_URL+'/user',
     //   )
     
@@ -17,7 +17,7 @@ app.post('/api/adduser',(req,res)=>{
       
 })
 app.post('/api/addcheck',(req,res)=>{
-    console.log(req.params);
+    console.log('create check',req.params);
 })
 
 app.listen(PORT,()=>{
