@@ -12,6 +12,7 @@ app.post('/api/adduser',async (req,res)=>{
 try {
     
     const {data,user_meta} =req.body
+    console.log(data,user_meta);
     const users = await axios.get(BASE_URL+'/user/search/summary')
     if(users.find((user=>user.userProfile.email==data.user_email))){
         res.send('user already exists')
