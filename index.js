@@ -33,7 +33,7 @@ try {
                 "name": "N.S.O"
               },
               "email": data.user_email,
-              "phone": "0",
+              "phone": user_meta.user_phone||'053',
               "providerName": data.display_name,
             }     
     }
