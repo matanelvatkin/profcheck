@@ -10,36 +10,7 @@ app.use(cors())
 
 app.post('/api/adduser',async (req,res)=>{
 try {
-    
-    const {data,user_meta} =req.body
-    console.log(data,user_meta);
-    const users = await axios.get(BASE_URL+'/user/search/summary')
-    if(users.find((user=>user.userProfile.email==data.user_email))){
-        res.send('user already exists')
-        return 
-    }
-    const request = {
-            "firstName": user_meta.first_name[0],
-            "lastName": user_meta.last_name[0],
-            "username": data.user_login,
-            "providerName": data.display_name,
-            "role": {
-              "id": 1,
-              "name": "CUSTOMER"
-            },
-            "password": data.user_pass,
-            "userProfile": {
-              "organization": {
-                "id": 70,
-                "name": "N.S.O"
-              },
-              "email": data.user_email,
-              "phone": user_meta.user_phone||'053',
-              "providerName": data.display_name,
-            }     
-    }
-    const results = await axios.post(BASE_URL+'/user',request)
-    console.log(results);
+    console.log(req.body);
       res.send('ok')
 } catch (error) {
     
