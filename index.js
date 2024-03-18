@@ -14,7 +14,7 @@ app.post("/api/adduser", async (req, res) => {
           firstName: req.body.user_meta.first_name[0],
           lastName: req.body.user_meta.last_name[0],
           username: req.body.user_meta.first_name[0],
-          providerName: "",
+          providerName: "Profcheck",
           role: {
               id: 3,
               name: "CUSTOMER",
@@ -24,17 +24,10 @@ app.post("/api/adduser", async (req, res) => {
             },
             password:req.body.data.user_pass,
             userProfile: {
-                organization: {
-                    id: 70,
-                    name: "N.S.O",
-                    parentId: null,
-                    parentName: null,
-                    version: 0,
-                    logo: "",
-                },
+                organization: {},
                 email: req.body.data.user_email,
                 phone: req.body.user_meta.billing_phone[0],
-                providerName: "",
+                providerName: "Profcheck",
             },
         };
         const users = await axios.get('https://bof.profchecksys.com/user/search/summary')
