@@ -17,7 +17,7 @@ app.post("/api/adduser", async (req, res) => {
           providerName: "",
           role: {
               id: 3,
-              name: "CASTOUMER",
+              name: "CUSTOMER",
               parentId: null,
               parentName: null,
               version: 0,
@@ -37,8 +37,13 @@ app.post("/api/adduser", async (req, res) => {
                 providerName: "",
             },
         };
-    const res = await axios.post("https://bof.profchecksys.com/user", json);
-    console.log(res);
+        const users = await axios.get('https://bof.profchecksys.com/user/search/summary')
+        if(users.find(user=>user.userProfile.email==json.userProfile.email)){
+            res.send('ok')
+            return
+        }
+    const results = await axios.post("https://bof.profchecksys.com/user", json);
+    console.log(results);
 
     res.send("ok");
   } catch (error) {
