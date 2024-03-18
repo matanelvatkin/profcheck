@@ -25,7 +25,7 @@ app.post("/api/adduser", async (req, res) => {
             password:req.body.data.user_pass,
             userProfile: {
                 organization: {
-                    id: 1,
+                    id: 70,
                     name: "",
                     parentId: null,
                     parentName: null,
