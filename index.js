@@ -13,7 +13,7 @@ app.post("/api/adduser", async (req, res) => {
       const json = {
           firstName: req.body.user_meta.first_name[0],
           lastName: req.body.user_meta.last_name[0],
-          username: req.body.data.user_nickname,
+          username: req.body.user_meta.first_name[0],
           providerName: "",
           role: {
               id: 3,
@@ -37,7 +37,6 @@ app.post("/api/adduser", async (req, res) => {
                 providerName: "",
             },
         };
-        console.log(json);
     const res = await axios.post("https://bof.profchecksys.com/user", json);
     console.log(res);
 
