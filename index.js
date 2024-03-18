@@ -24,7 +24,14 @@ app.post("/api/adduser", async (req, res) => {
             },
             password:req.body.data.user_pass,
             userProfile: {
-                organization: {},
+                organization: {
+                    id: 1,
+                    name: "",
+                    parentId: null,
+                    parentName: null,
+                    version: 0,
+                    logo: "",
+                },
                 email: req.body.data.user_email,
                 phone: req.body.user_meta.billing_phone[0],
                 providerName: "Profcheck",
