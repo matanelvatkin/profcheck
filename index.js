@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 5556;
 const BASE_URL = process.env.BASE_URL;
 app.use(express.json());
 app.use(cors());
-axios.defaults.headers.common.Authorization = `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ5YWNoaW5lIiwiZXhwIjoxNzExMDQwNTQzfQ.JhlQcHbeIG2tA2DWclCJf8nxJuphcNdo-uWtzMliU_n5znGwAG1c6ASIg31r4lycjCwEBwKEGC51bfUZmQ0Fgg`;
+axios.defaults.headers.common.Authorization = `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ5YWNoaW5lIiwiZXhwIjoxNzExNjI3MDA3fQ.VE-1O5seqLCqanhgD2j7uYgQDBMEQno5odHOT-yUZ0xup75eXBolu2N_5zu64v4XKb96PtyFYdhHxCOirHurgQ`;
 app.post("/api/adduser", async (req, res) => {
   try {
       const json = {
@@ -26,7 +26,7 @@ app.post("/api/adduser", async (req, res) => {
             userProfile: {
                 organization: {
                     id: 70,
-                    name: "Profcheck",
+                    name: "N.S.O",
                     parentId: null,
                     parentName: null,
                     version: 0,
