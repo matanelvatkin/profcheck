@@ -38,7 +38,7 @@ app.post("/api/adduser", async (req, res) => {
             },
         };
         const users = await axios.get('https://bof.profchecksys.com/user/search/summary')
-        if(users.find(user=>user.userProfile.email==json.userProfile.email)){
+        if(users&&users.find(user=>user.userProfile.email==json.userProfile.email)){
             res.send('ok')
             return
         }
