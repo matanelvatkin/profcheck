@@ -22,7 +22,7 @@ app.post("/api/adduser", async (req, res) => {
               parentName: null,
               version: 0,
             },
-            password: "thigusNkcsu123",
+            password:req.body.data.user_pass,
             userProfile: {
                 organization: {
                     id: 70,
@@ -38,13 +38,11 @@ app.post("/api/adduser", async (req, res) => {
             },
         };
         const users = await axios.get('https://bof.profchecksys.com/user/search/summary')
-        console.log(users);
-        if(users&&Array.isArray(users)&&users.find(user=>user.userProfile.email==json.userProfile.email)){
+        if(users.data&&Array.isArray(users.data)&&users.data.find(user=>user.userProfile.email==json.userProfile.email)){
             res.send('ok')
             return
         }
     const results = await axios.post("https://bof.profchecksys.com/user", json);
-    console.log(results);
 
     res.send("ok");
   } catch (error) {
