@@ -42,7 +42,9 @@ app.post("/api/adduser", async (req, res) => {
     console.log(res);
 
     res.send("ok");
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 });
 app.post("/api/addcheck", (req, res) => {
   console.log("create check", req.params);
