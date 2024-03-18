@@ -26,7 +26,7 @@ app.post("/api/adduser", async (req, res) => {
             userProfile: {
                 organization: {
                     id: 70,
-                    name: "",
+                    name: "Profcheck",
                     parentId: null,
                     parentName: null,
                     version: 0,
@@ -43,6 +43,7 @@ app.post("/api/adduser", async (req, res) => {
             return
         }
     const results = await axios.post("https://bof.profchecksys.com/user", json);
+    console.log(results);
 
     res.send("ok");
   } catch (error) {
