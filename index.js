@@ -11,38 +11,38 @@ app.post("/api/adduser", async (req, res) => {
   try {
     const token = await axios.post("https://bof.profchecksys.com/account/signin", {username:'yachine',password:"Profcheck123!"});
     axios.defaults.headers.common.Authorization = token.headers.authorization
-      const json = {
-          "enabled": true,
-          "firstName": req.body.user_meta.first_name[0],
-          "lastName": req.body.user_meta.last_name[0],
-          "name": req.body.user_meta.first_name[0],
-          "password":req.body.data.user_pass,
-          "role": {
-            id: 3,
-            name: "CUSTOMER",
-            parentId: null,
-            parentName: null,
-            version: 0,
-          },
-          userProfile: {
-            organization: {
-                id: 70,
-                name: "N.S.O",
-                parentId: null,
-                parentName: null,
-                version: 0,
-                logo: "",
-            },
-            email: req.body.data.user_email,
-            phone: req.body.user_meta.billing_phone[0],
-            providerName: "Profcheck",
-        }}
+      // const json = {
+      //     "enabled": true,
+      //     "firstName": req.body.user_meta.first_name[0],
+      //     "lastName": req.body.user_meta.last_name[0],
+      //     "name": req.body.user_meta.first_name[0],
+      //     "password":req.body.data.user_pass,
+      //     "role": {
+      //       id: 3,
+      //       name: "CUSTOMER",
+      //       parentId: null,
+      //       parentName: null,
+      //       version: 0,
+      //     },
+      //     userProfile: {
+      //       organization: {
+      //           id: 70,
+      //           name: "N.S.O",
+      //           parentId: null,
+      //           parentName: null,
+      //           version: 0,
+      //           logo: "",
+      //       },
+      //       email: req.body.data.user_email,
+      //       phone: req.body.user_meta.billing_phone[0],
+      //       providerName: "Profcheck",
+      //   }}
         // const users = await axios.get('https://bof.profchecksys.com/user/search/summary')
         // if(users.data&&Array.isArray(users.data)&&users.data.find(user=>user.userProfile.email==json.userProfile.email)){
         //     res.send('ok')
         //     return
         // }
-    const results = await axios.post("https://bof.profchecksys.com/account/signup", json);
+    const results = await axios.post("https://bof.profchecksys.com/account/signup", {"firstName":"UserTest2","lastName":"UserTest2","username":"UserTest22","providerName":"","role":{"id":3,"name":"CUSTOMER","parentId":null,"parentName":null,"version":0},"password":"thigusNkcsu123","userProfile":{"organization":{"id":70,"name":"N.S.O","parentId":null,"parentName":null,"version":0,"logo":""},"email":"guybiton7@gmail.com","phone":"","providerName":""}});
     console.log(results);
 
     res.send("ok");
