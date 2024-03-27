@@ -42,8 +42,41 @@ app.post("/api/adduser", async (req, res) => {
         //     res.send('ok')
         //     return
         // }
-    const results = await axios.post("https://bof.profchecksys.com/account/signup", {Headers:{Authorization:token.headers.authorization}},
-    {"firstName":"UserTest2","lastName":"UserTest2","username":"UserTest22","providerName":"","role":{"id":3,"name":"CUSTOMER","parentId":null,"parentName":null,"version":0},"password":"thigusNkcsu123","userProfile":{"organization":{"id":70,"name":"N.S.O","parentId":null,"parentName":null,"version":0,"logo":""},"email":"guybiton7@gmail.com","phone":"","providerName":""}});
+    const results =await axios.post(
+      "https://bof.profchecksys.com/account/signup",
+      {
+        "firstName": "UserTest2",
+        "lastName": "UserTest2",
+        "username": "UserTest22",
+        "providerName": "",
+        "role": {
+          "id": 3,
+          "name": "CUSTOMER",
+          "parentId": null,
+          "parentName": null,
+          "version": 0
+        },
+        "password": "thigusNkcsu123",
+        "userProfile": {
+          "organization": {
+            "id": 70,
+            "name": "N.S.O",
+            "parentId": null,
+            "parentName": null,
+            "version": 0,
+            "logo": ""
+          },
+          "email": "guybiton7@gmail.com",
+          "phone": "",
+          "providerName": ""
+        }
+      },
+      {
+        headers: {
+          Authorization: token.headers.authorization
+        }
+      }
+    );
     console.log(results);
 
     res.send("ok");
