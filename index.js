@@ -7,45 +7,44 @@ const PORT = process.env.PORT || 5556;
 const BASE_URL = process.env.BASE_URL;
 app.use(express.json());
 app.use(cors());
-// axios.defaults.headers.common.Authorization = `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ5YWNoaW5lIiwiZXhwIjoxNzExNjI3MDA3fQ.VE-1O5seqLCqanhgD2j7uYgQDBMEQno5odHOT-yUZ0xup75eXBolu2N_5zu64v4XKb96PtyFYdhHxCOirHurgQ`;
 app.post("/api/adduser", async (req, res) => {
   try {
     const token = await axios.post("https://bof.profchecksys.com/account/signin", {username:'yachine',password:"Profcheck123!"});
-    console.log(token.headers);
-    //   const json = {
-    //       firstName: req.body.user_meta.first_name[0],
-    //       lastName: req.body.user_meta.last_name[0],
-    //       username: req.body.user_meta.first_name[0],
-    //       providerName: "Profcheck",
-    //       role: {
-    //           id: 3,
-    //           name: "CUSTOMER",
-    //           parentId: null,
-    //           parentName: null,
-    //           version: 0,
-    //         },
-    //         password:req.body.data.user_pass,
-    //         userProfile: {
-    //             organization: {
-    //                 id: 70,
-    //                 name: "N.S.O",
-    //                 parentId: null,
-    //                 parentName: null,
-    //                 version: 0,
-    //                 logo: "",
-    //             },
-    //             email: req.body.data.user_email,
-    //             phone: req.body.user_meta.billing_phone[0],
-    //             providerName: "Profcheck",
-    //         },
-    //     };
-    //     // const users = await axios.get('https://bof.profchecksys.com/user/search/summary')
-    //     // if(users.data&&Array.isArray(users.data)&&users.data.find(user=>user.userProfile.email==json.userProfile.email)){
-    //     //     res.send('ok')
-    //     //     return
-    //     // }
-    // const results = await axios.post("https://bof.profchecksys.com/user", json);
-    // console.log(results);
+    axios.defaults.headers.common.Authorization = token.headers.authorization
+      const json = {
+          firstName: req.body.user_meta.first_name[0],
+          lastName: req.body.user_meta.last_name[0],
+          username: req.body.user_meta.first_name[0],
+          providerName: "Profcheck",
+          role: {
+              id: 3,
+              name: "CUSTOMER",
+              parentId: null,
+              parentName: null,
+              version: 0,
+            },
+            password:req.body.data.user_pass,
+            userProfile: {
+                organization: {
+                    id: 70,
+                    name: "N.S.O",
+                    parentId: null,
+                    parentName: null,
+                    version: 0,
+                    logo: "",
+                },
+                email: req.body.data.user_email,
+                phone: req.body.user_meta.billing_phone[0],
+                providerName: "Profcheck",
+            },
+        };
+        // const users = await axios.get('https://bof.profchecksys.com/user/search/summary')
+        // if(users.data&&Array.isArray(users.data)&&users.data.find(user=>user.userProfile.email==json.userProfile.email)){
+        //     res.send('ok')
+        //     return
+        // }
+    const results = await axios.post("https://bof.profchecksys.com/user", json);
+    console.log(results);
 
     res.send("ok");
   } catch (error) {
