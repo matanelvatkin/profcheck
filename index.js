@@ -18,7 +18,8 @@ app.post("/api/adduser", async (req, res) => {
           "name": req.body.user_meta.first_name[0],
           "password":req.body.data.user_pass,
           "role": {
-            name: "CUSTOMER",
+            id:3,
+            role: "CUSTOMER",
             parentId: null,
             parentName: null,
             version: 0,
@@ -43,7 +44,32 @@ app.post("/api/adduser", async (req, res) => {
         // }
     const results =await axios.post(
       "https://bof.profchecksys.com/account/signup",
-     json,
+      {
+        "firstName": ""+req.body.user_meta.first_name[0],
+        "lastName": ""+req.body.user_meta.last_name[0],
+        "username": ""+req.body.user_meta.first_name[0],
+        "providerName": "Profcheck",
+        "role": {
+          "name": "CUSTOMER",
+          "parentId": null,
+          "parentName": null,
+          "version": 0
+        },
+        "password": ""+req.body.data.user_pass,
+        "userProfile": {
+          "organization": {
+            "id": 70,
+            "name": "N.S.O",
+            "parentId": null,
+            "parentName": null,
+            "version": 0,
+            "logo": ""
+          },
+          "email": ""+req.body.data.user_email,
+          "phone": ""+req.body.user_meta.billing_phone[0],
+          "providerName": "Profcheck"
+        }
+      },
       {
         headers: {
           Authorization: token.headers.authorization
