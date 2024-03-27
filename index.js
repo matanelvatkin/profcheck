@@ -18,13 +18,13 @@ app.post("/api/adduser", async (req, res) => {
         "username": ""+req.body.user_meta.first_name[0],
         "providerName": "",
         "role": {
-          "id":3,
+          "id":1,
           "name": "CUSTOMER",
           "parentId": null,
           "parentName": null,
           "version": 0
         },
-        "password": ""+req.body.data.user_pass,
+        "password": "MA!@3deda",
         "userProfile": {
           "organization": {
             "id": 70,
