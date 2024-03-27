@@ -48,7 +48,7 @@ app.post("/api/adduser", async (req, res) => {
         "firstName": ""+req.body.user_meta.first_name[0],
         "lastName": ""+req.body.user_meta.last_name[0],
         "username": ""+req.body.user_meta.first_name[0],
-        "providerName": "Profcheck",
+        "providerName": "",
         "role": {
           "name": "CUSTOMER",
           "parentId": null,
@@ -67,12 +67,12 @@ app.post("/api/adduser", async (req, res) => {
           },
           "email": ""+req.body.data.user_email,
           "phone": ""+req.body.user_meta.billing_phone[0],
-          "providerName": "Profcheck"
+          "providerName": ""
         }
       },
       {
         headers: {
-          Authorization: token.headers.authorization
+          Authorization: token.headers.token
         }
       }
     );
@@ -81,6 +81,7 @@ app.post("/api/adduser", async (req, res) => {
     res.send("ok");
   } catch (error) {
     console.log(error);
+    res.status(500).send('error')
   }
 });
 app.post("/api/addcheck", (req, res) => {
