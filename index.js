@@ -10,8 +10,8 @@ app.use(cors());
 // axios.defaults.headers.common.Authorization = `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ5YWNoaW5lIiwiZXhwIjoxNzExNjI3MDA3fQ.VE-1O5seqLCqanhgD2j7uYgQDBMEQno5odHOT-yUZ0xup75eXBolu2N_5zu64v4XKb96PtyFYdhHxCOirHurgQ`;
 app.post("/api/adduser", async (req, res) => {
   try {
-    const token = await axios.post("https://bof.profchecksys.com/account/signin", {name:'yachine'});
-    console.log(token);
+    const token = await axios.post("https://bof.profchecksys.com/account/signin", {username:'yachine',password:"Profcheck123!"});
+    console.log(token.headers);
     //   const json = {
     //       firstName: req.body.user_meta.first_name[0],
     //       lastName: req.body.user_meta.last_name[0],
