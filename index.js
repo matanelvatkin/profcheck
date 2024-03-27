@@ -10,7 +10,7 @@ app.use(cors());
 app.post("/api/adduser", async (req, res) => {
   try {
     const token = await axios.post("https://bof.profchecksys.com/account/signin", {username:'yachine',password:"Profcheck123!"});
-    axios.defaults.headers.common.Authorization = token.headers.authorization
+    
       // const json = {
       //     "enabled": true,
       //     "firstName": req.body.user_meta.first_name[0],
@@ -42,7 +42,8 @@ app.post("/api/adduser", async (req, res) => {
         //     res.send('ok')
         //     return
         // }
-    const results = await axios.post("https://bof.profchecksys.com/account/signup", {"firstName":"UserTest2","lastName":"UserTest2","username":"UserTest22","providerName":"","role":{"id":3,"name":"CUSTOMER","parentId":null,"parentName":null,"version":0},"password":"thigusNkcsu123","userProfile":{"organization":{"id":70,"name":"N.S.O","parentId":null,"parentName":null,"version":0,"logo":""},"email":"guybiton7@gmail.com","phone":"","providerName":""}});
+    const results = await axios.post("https://bof.profchecksys.com/account/signup", {Headers:{Authorization:token.headers.authorization}},
+    {"firstName":"UserTest2","lastName":"UserTest2","username":"UserTest22","providerName":"","role":{"id":3,"name":"CUSTOMER","parentId":null,"parentName":null,"version":0},"password":"thigusNkcsu123","userProfile":{"organization":{"id":70,"name":"N.S.O","parentId":null,"parentName":null,"version":0,"logo":""},"email":"guybiton7@gmail.com","phone":"","providerName":""}});
     console.log(results);
 
     res.send("ok");
