@@ -36,16 +36,13 @@ app.post("/api/adduser", async (req, res) => {
             email: req.body.data.user_email,
             phone: req.body.user_meta.billing_phone[0],
             providerName: "Profcheck",
-        },
-          "username": req.body.user_meta.first_name[0],
-          "version": 0
-        }
+        }}
         // const users = await axios.get('https://bof.profchecksys.com/user/search/summary')
         // if(users.data&&Array.isArray(users.data)&&users.data.find(user=>user.userProfile.email==json.userProfile.email)){
         //     res.send('ok')
         //     return
         // }
-    const results = await axios.post("https://bof.profchecksys.com/user", json);
+    const results = await axios.post("https://bof.profchecksys.com/account/signup", json);
     console.log(results);
 
     res.send("ok");
