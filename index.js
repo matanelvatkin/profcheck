@@ -7,8 +7,8 @@ const PORT = process.env.PORT || 5556;
 const BASE_URL = process.env.BASE_URL;
 app.use(express.json());
 app.use(cors());
-axios.defaults.headers.common.Authorization = `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ5YWNoaW5lIiwiZXhwIjoxNzExNjI3MDA3fQ.VE-1O5seqLCqanhgD2j7uYgQDBMEQno5odHOT-yUZ0xup75eXBolu2N_5zu64v4XKb96PtyFYdhHxCOirHurgQ`;
-app.post("/api/adduser", async (req, res) => {
+// axios.defaults.headers.common.Authorization = `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ5YWNoaW5lIiwiZXhwIjoxNzExNjI3MDA3fQ.VE-1O5seqLCqanhgD2j7uYgQDBMEQno5odHOT-yUZ0xup75eXBolu2N_5zu64v4XKb96PtyFYdhHxCOirHurgQ`;
+app.post("/api/user", async (req, res) => {
   try {
       const json = {
           firstName: req.body.user_meta.first_name[0],
