@@ -72,7 +72,7 @@ app.post("/api/adduser", async (req, res) => {
       },
       {
         headers: {
-          Authorization: token.headers.token
+          Authorization: token.data.token
         }
       }
     );
