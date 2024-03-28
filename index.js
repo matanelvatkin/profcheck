@@ -13,7 +13,7 @@ app.post("/api/adduser", async (req, res) => {
       "https://bof.profchecksys.com/account/signin",
       { username: "yachine", password: "Profcheck123!" }
     );
-    console.log(req.body.data.user_pass);
+    console.log(req.body);
     await axios.post(
       "https://bof.profchecksys.com/account/signup",
       {
@@ -28,7 +28,7 @@ app.post("/api/adduser", async (req, res) => {
           parentName: null,
           version: 0,
         },
-        password: ""+req.body.data.user_pass,
+        password: ""+req.body.user_meta.billing_passapp,
         userProfile: {
           organization: {
             id: 70,
