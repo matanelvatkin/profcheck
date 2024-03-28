@@ -17,34 +17,33 @@ app.post("/api/adduser", async (req, res) => {
     const results = await axios.post(
       "https://bof.profchecksys.com/account/signup",
       {
-        body: {
-          firstName: "" + req.body.user_meta.first_name[0],
-          lastName: "" + req.body.user_meta.last_name[0],
-          username: "" + req.body.user_meta.first_name[0],
-          providerName: "",
-          role: {
-            id: 1,
-            name: "CUSTOMER",
+        firstName: "" + req.body.user_meta.first_name[0],
+        lastName: "" + req.body.user_meta.last_name[0],
+        username: "" + req.body.user_meta.first_name[0],
+        providerName: "",
+        role: {
+          id: 1,
+          name: "CUSTOMER",
+          parentId: null,
+          parentName: null,
+          version: 0,
+        },
+        password: "thigusNkcsu123",
+        userProfile: {
+          organization: {
+            id: 70,
+            name: "N.S.O",
             parentId: null,
             parentName: null,
             version: 0,
+            logo: "",
           },
-          password: "thigusNkcsu123",
-          userProfile: {
-            organization: {
-              id: 70,
-              name: "N.S.O",
-              parentId: null,
-              parentName: null,
-              version: 0,
-              logo: "",
-            },
-            email: "" + req.body.data.user_email,
-            phone: "" + req.body.user_meta.billing_phone[0],
-            providerName: "",
-          },
+          email: "" + req.body.data.user_email,
+          phone: "" + req.body.user_meta.billing_phone[0],
+          providerName: "",
         },
-
+      },
+      {
         headers: {
           Authorization: token.data.token,
         },
