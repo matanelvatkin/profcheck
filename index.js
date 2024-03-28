@@ -9,40 +9,45 @@ app.use(express.json());
 app.use(cors());
 app.post("/api/adduser", async (req, res) => {
   try {
-    const token = await axios.post("https://bof.profchecksys.com/account/signin", {username:'yachine',password:"Profcheck123!"});
-    const results =await axios.post(
+    const token = await axios.post(
+      "https://bof.profchecksys.com/account/signin",
+      { username: "yachine", password: "Profcheck123!" }
+    );
+    console.log(token.data.token);
+    const results = await axios.post(
       "https://bof.profchecksys.com/account/signup",
       {
-        "firstName": ""+req.body.user_meta.first_name[0],
-        "lastName": ""+req.body.user_meta.last_name[0],
-        "username": ""+req.body.user_meta.first_name[0],
-        "providerName": "",
-        "role": {
-          "id":1,
-          "name": "CUSTOMER",
-          "parentId": null,
-          "parentName": null,
-          "version": 0
-        },
-        "password": "thigusNkcsu123",
-        "userProfile": {
-          "organization": {
-            "id": 70,
-            "name": "N.S.O",
-            "parentId": null,
-            "parentName": null,
-            "version": 0,
-            "logo": ""
+        body: {
+          firstName: "" + req.body.user_meta.first_name[0],
+          lastName: "" + req.body.user_meta.last_name[0],
+          username: "" + req.body.user_meta.first_name[0],
+          providerName: "",
+          role: {
+            id: 1,
+            name: "CUSTOMER",
+            parentId: null,
+            parentName: null,
+            version: 0,
           },
-          "email": ""+req.body.data.user_email,
-          "phone": ""+req.body.user_meta.billing_phone[0],
-          "providerName": ""
-        }
-      },
-      {
+          password: "thigusNkcsu123",
+          userProfile: {
+            organization: {
+              id: 70,
+              name: "N.S.O",
+              parentId: null,
+              parentName: null,
+              version: 0,
+              logo: "",
+            },
+            email: "" + req.body.data.user_email,
+            phone: "" + req.body.user_meta.billing_phone[0],
+            providerName: "",
+          },
+        },
+
         headers: {
-          Authorization: token.data.token
-        }
+          Authorization: token.data.token,
+        },
       }
     );
     console.log(results);
@@ -50,7 +55,7 @@ app.post("/api/adduser", async (req, res) => {
     res.send("ok");
   } catch (error) {
     console.log(error);
-    res.status(500).send('error')
+    res.status(500).send("error");
   }
 });
 app.post("/api/addcheck", (req, res) => {
