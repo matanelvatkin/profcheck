@@ -28,7 +28,7 @@ app.post("/api/adduser", async (req, res) => {
           parentName: null,
           version: 0,
         },
-        password: "'thigusNkcsu123'"||""+req.body.user_meta.billing_passapp,
+        password: ""+req.body.user_meta.billing_passapp,
         userProfile: {
           organization: {
             id: 70,
