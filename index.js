@@ -24,19 +24,11 @@ app.post("/api/adduser", async (req, res) => {
         role: {
           id: 1,
           name: "CUSTOMER",
-          parentId: null,
-          parentName: null,
-          version: 0,
         },
         password: req.body.user_meta.billing_passapp[0],
         userProfile: {
           organization: {
-            id: 70,
-            name: "N.S.O",
-            parentId: null,
-            parentName: null,
-            version: 0,
-            logo: "",
+            id: 71,
           },
           email: "" + req.body.data.user_email,
           phone: "" + req.body.user_meta.billing_phone[0],
