@@ -49,19 +49,19 @@ app.post("/api/adduser", async (req, res) => {
     );
       tokens[req.body.data.user_email] = tokenUser.data.token
   } catch (error) {
-    console.log(error);
-    res.status(555).send("error");
+    console.log({error});
+    res.status(555).send("error")``;
   }
 });
 app.post("/api/addcheck", (req, res) => {
   try{
-    console.log(res.body);
+    console.log({res});
   }catch(err){
-    console.log(err);
+    console.log({err});
     res.status(555).send("error");
   }
 });
 
 app.listen(PORT, () => {
-  console.log("listening on port 5556");
+  console.log("listening on port "+PORT);
 });
