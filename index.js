@@ -7,13 +7,14 @@ const PORT = process.env.PORT || 5556;
 const BASE_URL = process.env.BASE_URL;
 app.use(express.json());
 app.use(cors());
+
+const tokens = {}
 app.post("/api/adduser", async (req, res) => {
   try {
     const token = await axios.post(
       "https://bof.profchecksys.com/account/signin",
       { username: "yachine", password: "Profcheck123!" }
     );
-    console.log({token: token.data});
     const result =await axios.post(
       "https://bof.profchecksys.com/account/signup",
       {
@@ -41,15 +42,24 @@ app.post("/api/adduser", async (req, res) => {
         },
       }
     );
-    console.log({result: result.data});
     res.send("ok");
+    const tokenUser = await axios.post(
+      "https://bof.profchecksys.com/account/signin",
+      { username: req.body.data.user_login, password: req.body.user_meta.billing_passapp[0]}
+    );
+      tokens[req.body.data.user_email] = tokenUser.data.token
   } catch (error) {
     console.log(error);
-    res.status(500).send("error");
+    res.status(555).send("error");
   }
 });
 app.post("/api/addcheck", (req, res) => {
-  console.log("create check", req.params);
+  try{
+    console.log(res.body);
+  }catch(err){
+    console.log(err);
+    res.status(555).send("error");
+  }
 });
 
 app.listen(PORT, () => {
