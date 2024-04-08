@@ -58,7 +58,7 @@ app.post("/api/adduser", async (req, res) => {
     res.status(555).send("error");
   }
 });
-app.post("/api/addcheck",upload.any(),(req, res) => {
+app.post("/api/addcheck",upload.none(),(req, res) => {
   try {
     // Access regular form fields
     const postId = req.body.post_id;
