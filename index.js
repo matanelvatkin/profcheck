@@ -60,51 +60,7 @@ app.post("/api/adduser", async (req, res) => {
 });
 app.post("/api/addcheck",upload.any(),(req, res) => {
   try {
-    // Access regular form fields
-    const postId = req.body.post_id;
-    const formId = req.body.form_id;
-    const refererTitle = req.body.referer_title;
-    const queriedId = req.body.queried_id;
-    const parentName = req.body["form_fields[parentName]"];
-    const parentPhone = req.body["form_fields[parentPhone]"];
-    const parentEmail = req.body["form_fields[parentEmail]"];
-    const firstName = req.body["form_fields[firstName]"];
-    const middleName = req.body["form_fields[middleName]"];
-    const lastName = req.body["form_fields[lastName]"];
-    const email = req.body["form_fields[email]"];
-    const phone = req.body["form_fields[phone]"];
-    const note = req.body["form_fields[note]"];
-    const typeName = req.body["form_fields[typename]"];
-    const typeId = req.body["form_fields[typeid]"];
-    const userName = req.body["form_fields[userName]"];
-    const userPass = req.body["form_fields[userPass]"];
-    const action = req.body.action;
-    const referrer = req.body.referrer;
-
-    // Access uploaded files
-   
-
-    // Process the form fields and uploaded files
-    console.log("Post ID:", postId);
-    console.log("Form ID:", formId);
-    console.log("Referer Title:", refererTitle);
-    console.log("Queried ID:", queriedId);
-    console.log("Parent Name:", parentName);
-    console.log("Parent Phone:", parentPhone);
-    console.log("Parent Email:", parentEmail);
-    console.log("First Name:", firstName);
-    console.log("Middle Name:", middleName);
-    console.log("Last Name:", lastName);
-    console.log("Email:", email);
-    console.log("Phone:", phone);
-    console.log("Note:", note);
-    console.log("Type Name:", typeName);
-    console.log("Type ID:", typeId);
-    console.log("User Name:", userName);
-    console.log("User Pass:", userPass);
-    console.log("Action:", action);
-    console.log("Referrer:", referrer);
-   
+   console.log(req);
   }catch(err){
     console.log({err});
     res.status(555).send("error");
