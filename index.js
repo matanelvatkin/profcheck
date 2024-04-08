@@ -6,154 +6,165 @@ const axios = require("axios");
 const PORT = process.env.PORT || 5556;
 const BASE_URL = process.env.BASE_URL;
 const multer = require("multer");
-const upload = multer({dist:'./upload'});
-const fs=require("fs");
-
+const upload = multer({ dist: "./upload" });
+const fs = require("fs");
 
 app.use(express.json());
 app.use(cors());
 
-const tokens = {}
+const tokens = {};
 app.post("/api/adduser", async (req, res) => {
   try {
-    const token = await axios.post(
-      "https://bof.profchecksys.com/account/signin",
-      { username: "yachine", password: "Profcheck123!" }
-    );
-    const result =await axios.post(
-      "https://bof.profchecksys.com/account/signup",
-      {
-        firstName: "" + req.body.user_meta.first_name[0],
-        lastName: "" + req.body.user_meta.last_name[0],
-        username: "" + req.body.data.user_login,
-        providerName: "Profcheck",
-        role: {
-          id: 1,
-          name: "CUSTOMER",
+    if (!tokens[req.body.data.user_email]) {
+      const token = await axios.post(
+        "https://bof.profchecksys.com/account/signin",
+        { username: "yachine", password: "Profcheck123!" }
+      );
+      const result = await axios.post(
+        "https://bof.profchecksys.com/account/signup",
+        {
+          firstName: "" + req.body.user_meta.first_name[0],
+          lastName: "" + req.body.user_meta.last_name[0],
+          username: "" + req.body.data.user_login,
+          providerName: "Profcheck",
+          role: {
+            id: 1,
+            name: "CUSTOMER",
+          },
+          password: req.body.user_meta.billing_passapp[0],
+          userProfile: {
+            organization: {
+              id: 71,
+            },
+            email: "" + req.body.data.user_email,
+            phone: "" + req.body.user_meta.billing_phone[0],
+            providerName: "Profcheck",
+          },
         },
-        password: req.body.user_meta.billing_passapp[0],
-        userProfile: {
+        {
+          headers: {
+            Authorization: token.data.token,
+          },
+        }
+      );
+    }
+      res.send("ok");
+      const tokenUser = await axios.post(
+        "https://bof.profchecksys.com/account/signin",
+        {
+          username: req.body.data.user_login,
+          password: req.body.user_meta.billing_passapp[0],
+        }
+      );
+      tokens[req.body.data.user_email] = tokenUser.data.token;
+  } catch (error) {
+    console.log({ error });
+    res.status(555).send("error");
+  }
+});
+app.post(
+  "/api/addcheck",
+  express.urlencoded({ extended: true }),
+  async (req, res) => {
+    try {
+      const { body } = req;
+      const json = {
+        id: 0,
+        name: "",
+        parentId: null,
+        parentName: "" + body.parentName,
+        version: 0,
+        uniqueId: "",
+        title: "",
+        idNumber: "0000000000000",
+        createdDate: "",
+        generalInfo: {
+          id: 0,
+          name: null,
+          parentId: null,
+          parentName: null,
+          version: 0,
+          firstName: "" + body.firstName,
+          fullName: "",
+          language: "Hebrew",
+          simplePhone: body.phone,
+          middleName: "" + body.middleName,
+          lastName: "" + body.lastName,
+          previousName: null,
+          simpleAddress: "",
+          simplePlaceOfBirth: "",
+          dateOfBirth: null,
+          placeOfBirth: null,
+          address: null,
+          email: "" + body.email,
+          countryCallingCode: null,
+          nationalCallingCode: null,
+          imagePath: null,
+          note: "" + body.note,
+          urgentInspection: false,
+          portrait: "",
+          phone: "" + body.phone,
+        },
+        status: {
+          id: 7,
+          name: "close",
+          parentId: 2,
+          parentName: "InquiryStatusEnumEntity",
+          version: 0,
+        },
+        parts: null,
+        attachedFiles: [
+          {
+            id: 0,
+            name: "Untitled-2.pdf",
+            parentId: 0,
+            parentName: null,
+            version: 0,
+            type: null,
+            content: "",
+          },
+        ],
+        organization: {
+          id: 71,
+          name: "הזמנות מהחנות",
+          parentId: null,
+          parentName: null,
+          version: 0,
+        },
+        type: {
+          id: body.typeid,
+          name: body.form_name,
+          parentId: 8,
+          parentName: "INQUIRY_TYPE",
+          version: 0,
           organization: {
             id: 71,
+            name: "הזמנות מהחנות",
+            parentId: null,
+            parentName: null,
+            version: 0,
           },
-          email: "" + req.body.data.user_email,
-          phone: "" + req.body.user_meta.billing_phone[0],
-          providerName: "Profcheck",
         },
-      },
-      {
-        headers: {
-          Authorization: token.data.token,
-        },
-      }
-    );
-    res.send("ok");
-    const tokenUser = await axios.post(
-      "https://bof.profchecksys.com/account/signin",
-      { username: req.body.data.user_login, password: req.body.user_meta.billing_passapp[0]}
-    );
-      tokens[req.body.data.user_email] = tokenUser.data.token
-  } catch (error) {
-    console.log({error});
-    res.status(555).send("error");
-  }
-});
-app.post("/api/addcheck",express.urlencoded({ extended: true }),async (req, res) => {
-  try {
-    const {body} = req;
-      const json = {
-        "id": 0,
-        "name": "",
-        "parentId": null,
-        "parentName": ""+body.parentName,
-        "version": 0,
-        "uniqueId": "",
-        "title": "",
-        "idNumber": "0000000000000",
-        "createdDate": "",
-        "generalInfo": {
-            "id": 0,
-            "name": null,
-            "parentId": null,
-            "parentName": null,
-            "version": 0,
-            "firstName": ""+body.firstName,
-            "fullName": "",
-            "language": "Hebrew",
-            "simplePhone": body.phone,
-            "middleName": ""+body.middleName,
-            "lastName": ""+body.lastName,
-            "previousName": null,
-            "simpleAddress": "",
-            "simplePlaceOfBirth": "",
-            "dateOfBirth": null,
-            "placeOfBirth": null,
-            "address": null,
-            "email": ""+body.email,
-            "countryCallingCode": null,
-            "nationalCallingCode": null,
-            "imagePath": null,
-            "note": ""+body.note,
-            "urgentInspection": false,
-            "portrait":"",
-            "phone": ""+body.phone
-        },
-        "status": {
-            "id": 7,
-            "name": "close",
-            "parentId": 2,
-            "parentName": "InquiryStatusEnumEntity",
-            "version": 0
-        },
-        "parts": null,
-        "attachedFiles": [
-            {
-                "id": 0,
-                "name": "Untitled-2.pdf",
-                "parentId": 0,
-                "parentName": null,
-                "version": 0,
-                "type": null,
-                "content": ""
-            }
-        ],
-        "organization": {
-            "id": 71,
-            "name": "הזמנות מהחנות",
-            "parentId": null,
-            "parentName": null,
-            "version": 0
-        },
-        "type": {
-            "id": body.typeid,
-            "name": body.form_name,
-            "parentId": 8,
-            "parentName": "INQUIRY_TYPE",
-            "version": 0,
-            "organization": {
-                "id": 71,
-                "name": "הזמנות מהחנות",
-                "parentId": null,
-                "parentName": null,
-                "version": 0
-            }
-        },
-        "negativeInfo": false
+        negativeInfo: false,
+      };
+      const response = await axios.post(
+        "https://bof.profchecksys.com/inquiry",
+        json,
+        {
+          headers: {
+            Authorization: tokens[body.parenEmail],
+          },
+        }
+      );
+      console.log(response);
+    } catch (err) {
+      console.log({ err });
+      res.status(555).send("error");
     }
-    const res = await axios.post("https://bof.profchecksys.com/inquiry",json,{
-      headers: {
-        Authorization: tokens[body.parenEmail]
-      },
-    })
-    console.log(res);
-  }catch(err){
-    console.log({err});
-    res.status(555).send("error");
   }
-});
+);
 
 app.listen(PORT, () => {
-  if(!fs.existsSync('./upload')) fs.mkdirSync('./upload')
-  console.log("listening on port "+PORT);
+  if (!fs.existsSync("./upload")) fs.mkdirSync("./upload");
+  console.log("listening on port " + PORT);
 });
-
