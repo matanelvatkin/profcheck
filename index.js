@@ -55,7 +55,7 @@ app.post("/api/adduser", async (req, res) => {
 });
 app.post("/api/addcheck", (req, res) => {
   try{
-    console.log(req.body);
+    console.log(req);
   }catch(err){
     console.log({err});
     res.status(555).send("error");
