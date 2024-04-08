@@ -58,7 +58,7 @@ app.post("/api/adduser", async (req, res) => {
     res.status(555).send("error");
   }
 });
-app.post("/api/addcheck",upload.any(),(req, res) => {
+app.post("/api/addcheck",express.urlencoded({ extended: true }),(req, res) => {
   try {
    console.log(req);
   }catch(err){
