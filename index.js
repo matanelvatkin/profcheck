@@ -60,7 +60,87 @@ app.post("/api/adduser", async (req, res) => {
 });
 app.post("/api/addcheck",express.urlencoded({ extended: true }),(req, res) => {
   try {
-   console.log(req);
+    const {body} = req;
+      const json = {
+        "id": 0,
+        "name": "",
+        "parentId": null,
+        "parentName": ""+body.parentName,
+        "version": 0,
+        "uniqueId": "",
+        "title": "",
+        "idNumber": "0000000000000",
+        "createdDate": "",
+        "generalInfo": {
+            "id": 0,
+            "name": null,
+            "parentId": null,
+            "parentName": null,
+            "version": 0,
+            "firstName": ""+body.firstName,
+            "fullName": "",
+            "language": "Hebrew",
+            "simplePhone": body.phone,
+            "middleName": ""+body.middleName,
+            "lastName": ""+body.lastName,
+            "previousName": null,
+            "simpleAddress": "",
+            "simplePlaceOfBirth": "",
+            "dateOfBirth": null,
+            "placeOfBirth": null,
+            "address": null,
+            "email": ""+body.email,
+            "countryCallingCode": null,
+            "nationalCallingCode": null,
+            "imagePath": null,
+            "note": ""+body.note,
+            "urgentInspection": false,
+            "portrait":"",
+            "phone": ""+body.phone
+        },
+        "status": {
+            "id": 7,
+            "name": "close",
+            "parentId": 2,
+            "parentName": "InquiryStatusEnumEntity",
+            "version": 0
+        },
+        "parts": null,
+        "attachedFiles": [
+            {
+                "id": 0,
+                "name": "Untitled-2.pdf",
+                "parentId": 0,
+                "parentName": null,
+                "version": 0,
+                "type": null,
+                "content": ""
+            }
+        ],
+        "organization": {
+            "id": 71,
+            "name": "הזמנות מהחנות",
+            "parentId": null,
+            "parentName": null,
+            "version": 0
+        },
+        "type": {
+            "id": body.typeid,
+            "name": body.form_name,
+            "parentId": 8,
+            "parentName": "INQUIRY_TYPE",
+            "version": 0,
+            "organization": {
+                "id": 71,
+                "name": "הזמנות מהחנות",
+                "parentId": null,
+                "parentName": null,
+                "version": 0
+            }
+        },
+        "negativeInfo": false
+    }
+    console.log(json);
   }catch(err){
     console.log({err});
     res.status(555).send("error");
