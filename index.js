@@ -50,12 +50,12 @@ app.post("/api/adduser", async (req, res) => {
       tokens[req.body.data.user_email] = tokenUser.data.token
   } catch (error) {
     console.log({error});
-    res.status(555).send("error")``;
+    res.status(555).send("error");
   }
 });
 app.post("/api/addcheck", (req, res) => {
   try{
-    console.log({res});
+    console.log({req});
   }catch(err){
     console.log({err});
     res.status(555).send("error");
