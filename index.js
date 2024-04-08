@@ -152,7 +152,7 @@ app.post(
         json,
         {
           headers: {
-            Authorization: tokens[body.parenEmail],
+            Authorization: tokens[body.parentEmail],
           },
         }
       );
