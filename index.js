@@ -58,7 +58,7 @@ app.post("/api/adduser", async (req, res) => {
     res.status(555).send("error");
   }
 });
-app.post("/api/addcheck",express.urlencoded({ extended: true }),(req, res) => {
+app.post("/api/addcheck",express.urlencoded({ extended: true }),async (req, res) => {
   try {
     const {body} = req;
       const json = {
@@ -140,7 +140,12 @@ app.post("/api/addcheck",express.urlencoded({ extended: true }),(req, res) => {
         },
         "negativeInfo": false
     }
-    console.log(json);
+    const res = await axios.post("https://bof.profchecksys.com/inquiry",json,{
+      headers: {
+        Authorization: tokens[body.parenEmail]
+      },
+    })
+    console.log(res);
   }catch(err){
     console.log({err});
     res.status(555).send("error");
@@ -151,3 +156,4 @@ app.listen(PORT, () => {
   if(!fs.existsSync('./upload')) fs.mkdirSync('./upload')
   console.log("listening on port "+PORT);
 });
+
