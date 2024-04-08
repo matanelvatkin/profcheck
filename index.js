@@ -5,19 +5,7 @@ const cors = require("cors");
 const axios = require("axios");
 const PORT = process.env.PORT || 5556;
 const BASE_URL = process.env.BASE_URL;
-const multer = require('multer');
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/');
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() +file.originalname);
-  }
-});
-const upload = multer({
-  storage: storage,
-});
 
 app.use(express.json());
 app.use(cors());
@@ -67,7 +55,7 @@ app.post("/api/adduser", async (req, res) => {
     res.status(555).send("error");
   }
 });
-app.post("/api/addcheck",upload.any(), (req, res) => {
+app.post("/api/addcheck", (req, res) => {
   try{
     console.log(req);
   }catch(err){
