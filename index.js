@@ -5,6 +5,9 @@ const cors = require("cors");
 const axios = require("axios");
 const PORT = process.env.PORT || 5556;
 const BASE_URL = process.env.BASE_URL;
+const multer = require("multer");
+const upload = multer({dist:'./upload'});
+const fs=require("fs");
 
 
 app.use(express.json());
@@ -55,7 +58,7 @@ app.post("/api/adduser", async (req, res) => {
     res.status(555).send("error");
   }
 });
-app.post("/api/addcheck", (req, res) => {
+app.post("/api/addcheck",upload.any(),(req, res) => {
   try{
     console.log(req);
   }catch(err){
@@ -65,5 +68,6 @@ app.post("/api/addcheck", (req, res) => {
 });
 
 app.listen(PORT, () => {
+  if(!fs.existsSync('./upload')) fs.mkdirSync('./upload')
   console.log("listening on port "+PORT);
 });
