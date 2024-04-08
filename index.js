@@ -82,12 +82,7 @@ app.post("/api/addcheck",upload.fields(),(req, res) => {
     const referrer = req.body.referrer;
 
     // Access uploaded files
-    const idNumberFile = req.files.find(
-      (file) => file.fieldname === "form_fields[idNumber]"
-    );
-    const attachedFiles = req.files.filter(
-      (file) => file.fieldname === "form_fields[attachedFiles][]"
-    );
+   
 
     // Process the form fields and uploaded files
     console.log("Post ID:", postId);
@@ -109,19 +104,7 @@ app.post("/api/addcheck",upload.fields(),(req, res) => {
     console.log("User Pass:", userPass);
     console.log("Action:", action);
     console.log("Referrer:", referrer);
-
-    if (idNumberFile) {
-      console.log("ID Number File:", idNumberFile.originalname);
-      // Process the ID number file
-    }
-
-    if (attachedFiles.length > 0) {
-      console.log("Attached Files:");
-      attachedFiles.forEach((file) => {
-        console.log("- File:", file.originalname);
-        // Process each attached file
-      });
-    }
+   
   }catch(err){
     console.log({err});
     res.status(555).send("error");
