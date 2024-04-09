@@ -47,8 +47,6 @@ app.post("/api/adduser", async (req, res) => {
           },
         }
       );
-    }
-      res.send("ok");
       if(result){
         const tokenUser = await axios.post(
           "https://bof.profchecksys.com/account/signin",
@@ -59,6 +57,8 @@ app.post("/api/adduser", async (req, res) => {
         );
         tokens[req.body.data.user_email] = tokenUser.data.token;
       }
+    }
+      res.send("ok");
   } catch (error) {
     console.log({ error });
     res.status(555).send("error");
