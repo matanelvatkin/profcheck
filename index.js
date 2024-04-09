@@ -116,7 +116,7 @@ app.post(
           version: 0,
         },
         parts: null,
-        attachedFiles: body.attachedFiles.split(' , '),
+        attachedFiles: body.attachedFiles.split(' , ').map((file,index)=>({name:"file number"+ index,content:file})),
         organization: {
           id: 71,
           name: "הזמנות מהחנות",
