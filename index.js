@@ -68,6 +68,7 @@ app.post(
   async (req, res) => {
     try {
       const { body } = req;
+      console.log(body);
       const json = {
         id: 0,
         name: "",
@@ -102,7 +103,7 @@ app.post(
           imagePath: null,
           note: "" + body.note,
           urgentInspection: false,
-          portrait: "",
+          portrait: body.portrait,
           phone: "" + body.phone,
         },
         status: {
@@ -157,6 +158,7 @@ app.post(
         }
       );
       console.log(response);
+      res.send(response);
     } catch (err) {
       console.log({ err });
       res.status(555).send("error");
