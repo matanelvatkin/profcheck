@@ -70,6 +70,7 @@ app.post(
   async (req, res) => {
     try {
       const { body } = req;
+      console.log(body);
       const json = {
         id: 0,
         name: "",
