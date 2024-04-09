@@ -52,7 +52,7 @@ app.post("/api/adduser", async (req, res) => {
         const tokenUser = await axios.post(
           "https://bof.profchecksys.com/account/signin",
           {
-            username: result.data.username,
+            username: result.data.username||req.body.data.user_login,
             password: req.body.user_meta.billing_passapp[0],
           }
         );
