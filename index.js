@@ -116,15 +116,7 @@ app.post(
         },
         parts: null,
         attachedFiles: [
-          {
-            id: 0,
-            name: "Untitled-2.pdf",
-            parentId: 0,
-            parentName: null,
-            version: 0,
-            type: null,
-            content: "",
-          },
+         
         ],
         organization: {
           id: 71,
@@ -158,10 +150,10 @@ app.post(
           },
         }
       );
-      res.status(201).send('ok');
+      res.send('ok');
     } catch (err) {
       console.log({ err });
-      res.status(555).send("error");
+      res.send("error");
     }
   }
 );
