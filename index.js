@@ -116,9 +116,7 @@ app.post(
           version: 0,
         },
         parts: null,
-        attachedFiles: [
-         
-        ],
+        attachedFiles: body.attachedFiles.split(' , '),
         organization: {
           id: 71,
           name: "הזמנות מהחנות",
