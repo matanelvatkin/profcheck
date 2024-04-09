@@ -47,17 +47,18 @@ app.post("/api/adduser", async (req, res) => {
           },
         }
       );
-      console.log(result);
     }
       res.send("ok");
-      const tokenUser = await axios.post(
-        "https://bof.profchecksys.com/account/signin",
-        {
-          username: req.body.data.user_login,
-          password: req.body.user_meta.billing_passapp[0],
-        }
-      );
-      tokens[req.body.data.user_email] = tokenUser.data.token;
+      if(result){
+        const tokenUser = await axios.post(
+          "https://bof.profchecksys.com/account/signin",
+          {
+            username: result.data.username,
+            password: req.body.user_meta.billing_passapp[0],
+          }
+        );
+        tokens[req.body.data.user_email] = tokenUser.data.token;
+      }
   } catch (error) {
     console.log({ error });
     res.status(555).send("error");
@@ -69,7 +70,6 @@ app.post(
   async (req, res) => {
     try {
       const { body } = req;
-      console.log(body);
       const json = {
         id: 0,
         name: "",
@@ -158,7 +158,6 @@ app.post(
           },
         }
       );
-      console.log(response);
       res.send(response);
     } catch (err) {
       console.log({ err });
