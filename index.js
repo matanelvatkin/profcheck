@@ -70,7 +70,9 @@ app.post(
   async (req, res) => {
     try {
       const { body } = req;
-      console.log(body);
+      let attachedFiles = [];
+      if(body.attachedFiles.includes(' , '))body.attachedFiles.split(' , ').map((file,index)=>({name:"file number"+ index,content:file}))
+      else attachedFiles = [{name:"file ",content:body.attachedFiles}]
       const json = {
         id: 0,
         name: "",
@@ -116,7 +118,7 @@ app.post(
           version: 0,
         },
         parts: null,
-        attachedFiles: body.attachedFiles.split(' , ').map((file,index)=>({name:"file number"+ index,content:file})),
+        attachedFiles,
         organization: {
           id: 71,
           name: "הזמנות מהחנות",
