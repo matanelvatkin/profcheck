@@ -158,7 +158,7 @@ app.post(
           },
         }
       );
-      res.send(response);
+      res.status(201).send('ok');
     } catch (err) {
       console.log({ err });
       res.status(555).send("error");
