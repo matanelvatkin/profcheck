@@ -12,6 +12,7 @@ app.use(cors());
 const tokens = {};
 app.post("/api/adduser", async (req, res) => {
   try {
+    res.send('post success')
     if (!tokens[req.body.data.user_email]) {
       const token = await axios.post(
         "https://bof.profchecksys.com/account/signin",
