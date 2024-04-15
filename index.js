@@ -4,9 +4,6 @@ const app = express();
 const cors = require("cors");
 const axios = require("axios");
 const PORT = process.env.PORT || 5556;
-const BASE_URL = process.env.BASE_URL;
-const multer = require("multer");
-const upload = multer({ dist: "./upload" });
 const fs = require("fs");
 
 app.use(express.json());
@@ -158,7 +155,9 @@ app.post(
     }
   }
 );
-
+app.get('/', (req, res) => {
+  res.send('ok');
+})
 app.listen(PORT, () => {
   if (!fs.existsSync("./upload")) fs.mkdirSync("./upload");
   console.log("listening on port " + PORT);
