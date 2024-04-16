@@ -54,6 +54,7 @@ app.post("/api/adduser", async (req, res) => {
         );
         tokens[req.body.data.user_email] = tokenUser.data.token;
       }
+      console.log(tokens);
     }
       res.send("ok");
   } catch (error) {
